@@ -20,7 +20,11 @@ const JobDetailsForm: React.FC<{
         jobTitle: Yup.string().required("Job Title is required"),
         jobDetails: Yup.string().required("Job Details is required"),
         jobLocation: Yup.string().required("Job Location is required"),
-        jobPosition: Yup.string().required("Job position is required"),
+        /* The below is not required because 'It states that jobPosition is 
+         a required field in the form, and any field in the form is not using this value
+         so, we cannot see any errors on UI. But Formik will consider that form is incomplete and 
+         doesn't triggers onSubmit'. The instruction to go to next tab lies in onSubmit*/
+        // jobPosition: Yup.string().required("Job position is required"),
       }),
       onSubmit: (values) => {
         console.log({ values });
