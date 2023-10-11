@@ -1,5 +1,5 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import FormInput from "../../components/formComponents/FormInput";
 import FormSelect from "../../components/formComponents/FormSelect";
 import { useFormik } from "formik";
@@ -43,6 +43,41 @@ const RequisitionDetailsForm: React.FC<{
     },
   });
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    handleChange(e);
+    store?.setState((prev) => {
+      const state = { ...prev };
+      switch (name) {
+        case "requisitionTitle":
+          state.requisitionDetails.requisitionTitle = value;
+          break;
+        case "noOfOpenings":
+          state.requisitionDetails.noOfOpenings = parseInt(value);
+          break;
+      }
+      return state;
+    });
+  };
+
+  const handleFieldChange = (field: string, value: any) => {
+    const name = field;
+    setFieldValue(name, value);
+    store?.setState((prev) => {
+      const state = { ...prev };
+      switch (name) {
+        case "gender":
+          state.requisitionDetails.gender = value;
+          break;
+        case "urgency":
+          state.requisitionDetails.urgency = value;
+          break;
+      }
+      return state;
+    });
+  };
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -51,7 +86,7 @@ const RequisitionDetailsForm: React.FC<{
           label="Requisition Title"
           placeholder="Enter requisition title"
           name="requisitionTitle"
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           value={values?.requisitionTitle}
           error={errors?.requisitionTitle}
@@ -62,7 +97,7 @@ const RequisitionDetailsForm: React.FC<{
           label="Number of openings"
           placeholder="Enter number of openings"
           name="noOfOpenings"
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           value={values?.noOfOpenings}
           error={errors?.noOfOpenings}
@@ -74,7 +109,7 @@ const RequisitionDetailsForm: React.FC<{
           name="gender"
           placeholder="Select gender"
           options={genderOptions}
-          onChange={setFieldValue}
+          onChange={handleFieldChange}
           onBlur={setFieldTouched}
           error={errors.gender}
           touched={touched.gender}
@@ -86,7 +121,7 @@ const RequisitionDetailsForm: React.FC<{
           name="urgency"
           placeholder="Select urgency"
           options={urgencyOptions}
-          onChange={setFieldValue}
+          onChange={handleFieldChange}
           onBlur={setFieldTouched}
           error={errors.urgency}
           touched={touched.urgency}
