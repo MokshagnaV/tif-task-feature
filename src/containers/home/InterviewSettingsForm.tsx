@@ -10,10 +10,13 @@ import {
   interviewLanguageOptions,
   interviewModeOptions,
 } from "./constants";
+import { useData } from "./DataProvider";
 
 const InterviewDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
+  const store = useData();
+
   const {
     errors,
     touched,
@@ -23,14 +26,16 @@ const InterviewDetailsForm: React.FC<{
     setFieldValue,
   } = useFormik<IInterViewSettings>({
     initialValues: {
-      interviewMode: "",
-      interviewDuration: "",
-      interviewLanguage: "",
+      ...(store?.state.interviewSettings as IInterViewSettings),
     },
     validationSchema: Yup.object().shape({
       interviewMode: Yup.string().required("Interview Mode is required"),
-      interviewDuration: Yup.string().required("Interview Duration is required"),
-      interviewLanguage: Yup.string().required("Interview language is required"),
+      interviewDuration: Yup.string().required(
+        "Interview Duration is required"
+      ),
+      interviewLanguage: Yup.string().required(
+        "Interview language is required"
+      ),
     }),
     onSubmit: (values) => {
       console.log({ values });
@@ -42,6 +47,7 @@ const InterviewDetailsForm: React.FC<{
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
         <FormSelect
+          tab="interviewSettings"
           label="Interview Mode"
           placeholder="Select interview mode"
           name="interviewMode"
@@ -53,6 +59,7 @@ const InterviewDetailsForm: React.FC<{
           touched={touched?.interviewMode}
         />
         <FormSelect
+          tab="interviewSettings"
           label="Interview Duration"
           placeholder="Select interview duration"
           name="interviewDuration"
@@ -64,6 +71,7 @@ const InterviewDetailsForm: React.FC<{
           touched={touched?.interviewDuration}
         />
         <FormSelect
+          tab="interviewSettings"
           label="Job Location"
           name="interviewLanguage"
           placeholder="Select interview language"

@@ -3,6 +3,7 @@ import { useTheme } from "@chakra-ui/react";
 import FromWrapper from "./FormWrapper";
 import { IFormInputProps } from "@src/interface/forms";
 import ReactSelect, { Props } from "react-select";
+import { useData } from "@src/containers/home/DataProvider";
 
 interface IFormSelectProps
   extends Omit<IFormInputProps, "inputProps" | "type" | "onChange" | "onBlur"> {
@@ -13,6 +14,7 @@ interface IFormSelectProps
 }
 
 const FormSelect: React.FC<IFormSelectProps> = ({
+  tab,
   name,
   label,
   placeholder,
@@ -27,10 +29,16 @@ const FormSelect: React.FC<IFormSelectProps> = ({
   wrapperProps = {},
   options,
 }) => {
+  const store = useData();
   const theme = useTheme();
 
   const handleChange = (value: any) => {
     onChange && onChange(name, value?.value);
+    store?.setState((prev) => {
+      const state = { ...prev };
+      state[tab][name] = value?.value;
+      return state;
+    });
   };
   const handleBlur = () => {
     onBlur && onBlur(name, true);

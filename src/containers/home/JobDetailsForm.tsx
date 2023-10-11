@@ -5,16 +5,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IJobDetails } from "../../interface/forms";
+import { useData } from "./DataProvider";
 
 const JobDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
+  const store = useData();
   const { handleChange, errors, touched, handleBlur, handleSubmit, values } =
     useFormik<IJobDetails>({
       initialValues: {
-        jobTitle: "",
-        jobDetails: "",
-        jobLocation: "",
+        ...(store?.state.jobDetails as IJobDetails),
       },
       validationSchema: Yup.object().shape({
         jobTitle: Yup.string().required("Job Title is required"),
@@ -36,6 +36,7 @@ const JobDetailsForm: React.FC<{
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
         <FormInput
+          tab="jobDetails"
           label="Job Title"
           placeholder="Enter job title"
           name="jobTitle"
@@ -46,6 +47,7 @@ const JobDetailsForm: React.FC<{
           touched={touched?.jobTitle}
         />
         <FormInput
+          tab="jobDetails"
           label="Job Details"
           placeholder="Enter job details"
           name="jobDetails"
@@ -56,6 +58,7 @@ const JobDetailsForm: React.FC<{
           touched={touched?.jobDetails}
         />
         <FormInput
+          tab="jobDetails"
           label="Job Location"
           name="jobLocation"
           placeholder="Enter job location"
