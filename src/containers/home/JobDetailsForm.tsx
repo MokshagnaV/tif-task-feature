@@ -57,7 +57,6 @@ const JobDetailsForm: React.FC<{
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
         <FormInput
-          tab="jobDetails"
           label="Job Title"
           placeholder="Enter job title"
           name="jobTitle"
@@ -68,7 +67,6 @@ const JobDetailsForm: React.FC<{
           touched={touched?.jobTitle}
         />
         <FormInput
-          tab="jobDetails"
           label="Job Details"
           placeholder="Enter job details"
           name="jobDetails"
@@ -79,7 +77,6 @@ const JobDetailsForm: React.FC<{
           touched={touched?.jobDetails}
         />
         <FormInput
-          tab="jobDetails"
           label="Job Location"
           name="jobLocation"
           placeholder="Enter job location"

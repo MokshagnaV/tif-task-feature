@@ -2,7 +2,6 @@ import { FormControlProps, InputProps } from "@chakra-ui/react";
 import { FormikErrors, FormikTouched } from "formik";
 
 export interface IFormInputProps {
-  tab: string;
   name: string;
   label?: React.ReactNode;
   placeholder?: string;

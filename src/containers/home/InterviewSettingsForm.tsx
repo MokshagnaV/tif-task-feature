@@ -66,7 +66,6 @@ const InterviewDetailsForm: React.FC<{
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
         <FormSelect
-          tab="interviewSettings"
           label="Interview Mode"
           placeholder="Select interview mode"
           name="interviewMode"
@@ -78,7 +77,6 @@ const InterviewDetailsForm: React.FC<{
           touched={touched?.interviewMode}
         />
         <FormSelect
-          tab="interviewSettings"
           label="Interview Duration"
           placeholder="Select interview duration"
           name="interviewDuration"
@@ -90,7 +88,6 @@ const InterviewDetailsForm: React.FC<{
           touched={touched?.interviewDuration}
         />
         <FormSelect
-          tab="interviewSettings"
           label="Job Location"
           name="interviewLanguage"
           placeholder="Select interview language"

@@ -82,7 +82,6 @@ const RequisitionDetailsForm: React.FC<{
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
         <FormInput
-          tab="requisitionDetails"
           label="Requisition Title"
           placeholder="Enter requisition title"
           name="requisitionTitle"
@@ -93,7 +92,6 @@ const RequisitionDetailsForm: React.FC<{
           touched={touched?.requisitionTitle}
         />
         <FormInput
-          tab="requisitionDetails"
           label="Number of openings"
           placeholder="Enter number of openings"
           name="noOfOpenings"
@@ -104,7 +102,6 @@ const RequisitionDetailsForm: React.FC<{
           touched={touched?.noOfOpenings}
         />
         <FormSelect
-          tab="requisitionDetails"
           label="Gender"
           name="gender"
           placeholder="Select gender"
@@ -116,7 +113,6 @@ const RequisitionDetailsForm: React.FC<{
           value={values.gender}
         />
         <FormSelect
-          tab="requisitionDetails"
           label="Urgency"
           name="urgency"
           placeholder="Select urgency"

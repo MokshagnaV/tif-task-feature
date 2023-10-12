@@ -6,7 +6,6 @@ import { IFormInputProps } from "@src/interface/forms";
 const FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
   (
     {
-      tab,
       name,
       label,
       placeholder,

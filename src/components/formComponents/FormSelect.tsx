@@ -14,7 +14,6 @@ interface IFormSelectProps
 }
 
 const FormSelect: React.FC<IFormSelectProps> = ({
-  tab,
   name,
   label,
   placeholder,
