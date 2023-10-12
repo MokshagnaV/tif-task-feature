@@ -30,9 +30,12 @@ const FromWrapper: React.FC<IFormWrapperProps> = ({
   return (
     <FormControl width="100%" mb="24px" isInvalid={isInvalid} {...wrapperProps}>
       {label && <FormLabel>{label}</FormLabel>}
-      <InputGroup width="100%" alignItems="center" zIndex={999}>
+      {/* <InputGroup width="100%" alignItems="center">
         {children}
-      </InputGroup>
+      </InputGroup> */}
+      {/* The above InputGroup component causing the select options to not accessible easily.
+      Another element down the select option list is overlapping. */}
+      {children}
       {error && touched && (
         <FormErrorMessage color="red" fontSize=".75rem">
           {error}

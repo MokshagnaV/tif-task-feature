@@ -48,6 +48,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
       touched={touched}
     >
       <ReactSelect
+        // This below "instanceId" is added to get rid of warning
+        instanceId={name}
         name={name}
         placeholder={placeholder}
         value={options.find((item: { value: string }) => item?.value === value)}

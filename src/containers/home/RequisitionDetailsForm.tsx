@@ -54,7 +54,9 @@ const RequisitionDetailsForm: React.FC<{
           state.requisitionDetails.requisitionTitle = value;
           break;
         case "noOfOpenings":
-          state.requisitionDetails.noOfOpenings = parseInt(value);
+          state.requisitionDetails.noOfOpenings = Number.isNaN(parseInt(value))
+            ? 0
+            : parseInt(value);
           break;
       }
       return state;
