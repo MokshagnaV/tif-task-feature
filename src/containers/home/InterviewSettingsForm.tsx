@@ -1,5 +1,5 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import FormSelect from "../../components/formComponents/FormSelect";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -43,6 +43,25 @@ const InterviewDetailsForm: React.FC<{
     },
   });
 
+  const handleChange = (field: string, value: any) => {
+    const name = field;
+    setFieldValue(name, value);
+    store?.setState((prev) => {
+      const state = { ...prev };
+      switch (name) {
+        case "interviewMode":
+          state.interviewSettings.interviewMode = value;
+          break;
+        case "interviewDuration":
+          state.interviewSettings.interviewDuration = value;
+          break;
+        case "interviewLanguage":
+          state.interviewSettings.interviewLanguage = value;
+      }
+      return state;
+    });
+  };
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -52,7 +71,7 @@ const InterviewDetailsForm: React.FC<{
           placeholder="Select interview mode"
           name="interviewMode"
           options={interviewModeOptions}
-          onChange={setFieldValue}
+          onChange={handleChange}
           onBlur={setFieldTouched}
           value={values?.interviewMode}
           error={errors?.interviewMode}
@@ -64,7 +83,7 @@ const InterviewDetailsForm: React.FC<{
           placeholder="Select interview duration"
           name="interviewDuration"
           options={interviewDurationOptions}
-          onChange={setFieldValue}
+          onChange={handleChange}
           onBlur={setFieldTouched}
           value={values?.interviewDuration}
           error={errors?.interviewDuration}
@@ -76,7 +95,7 @@ const InterviewDetailsForm: React.FC<{
           name="interviewLanguage"
           placeholder="Select interview language"
           options={interviewLanguageOptions}
-          onChange={setFieldValue}
+          onChange={handleChange}
           onBlur={setFieldTouched}
           error={errors.interviewLanguage}
           touched={touched.interviewLanguage}

@@ -2,7 +2,6 @@ import React, { ChangeEvent } from "react";
 import { Input } from "@chakra-ui/react";
 import FormWrapper from "./FormWrapper";
 import { IFormInputProps } from "@src/interface/forms";
-import { useData } from "@src/containers/home/DataProvider";
 
 const FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
   (
@@ -24,19 +23,6 @@ const FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
     },
     ref
   ) => {
-    const store = useData();
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      // As onChange is an optional parameter
-      onChange && onChange(e);
-
-      const value = e.target.value;
-      store?.setState((prev) => {
-        const state = { ...prev };
-        state[tab][name] = value;
-        return state;
-      });
-    };
-
     return (
       <FormWrapper
         isInvalid={Boolean(error && touched)}
@@ -51,7 +37,7 @@ const FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
           placeholder={placeholder}
           type={type}
           value={value}
-          onChange={(e) => handleChange(e)}
+          onChange={onChange}
           onBlur={onBlur}
           // styles
           width="100%"

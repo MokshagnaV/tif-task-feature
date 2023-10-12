@@ -1,5 +1,5 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import FormInput from "../../components/formComponents/FormInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -32,6 +32,27 @@ const JobDetailsForm: React.FC<{
       },
     });
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    handleChange(e);
+    store?.setState((prev) => {
+      const state = { ...prev };
+      switch (name) {
+        case "jobTitle":
+          state.jobDetails.jobTitle = value;
+          break;
+        case "jobDetails":
+          state.jobDetails.jobDetails = value;
+          break;
+        case "jobLocation":
+          state.jobDetails.jobLocation = value;
+          break;
+      }
+      return state;
+    });
+  };
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -40,7 +61,7 @@ const JobDetailsForm: React.FC<{
           label="Job Title"
           placeholder="Enter job title"
           name="jobTitle"
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           value={values?.jobTitle}
           error={errors?.jobTitle}
@@ -51,7 +72,7 @@ const JobDetailsForm: React.FC<{
           label="Job Details"
           placeholder="Enter job details"
           name="jobDetails"
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           value={values?.jobDetails}
           error={errors?.jobDetails}
@@ -62,7 +83,7 @@ const JobDetailsForm: React.FC<{
           label="Job Location"
           name="jobLocation"
           placeholder="Enter job location"
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           error={errors.jobLocation}
           touched={touched.jobLocation}
